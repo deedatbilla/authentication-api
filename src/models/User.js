@@ -9,6 +9,16 @@ const userSchema = mongoose.Schema({
         required: true,
         trim: true
     },
+    constituency: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    voter_id: {
+        type: Number,
+        required: true,
+        trim: true
+    },
     email: {
         type: String,
         required: true,
@@ -20,10 +30,10 @@ const userSchema = mongoose.Schema({
             }
         }
     },
-    password: {
-        type: String,
+    pin: {
+        type: Number,
         required: true,
-        minLength: 7
+        minLength: 7,
     },
     tokens: [{
         token: {
