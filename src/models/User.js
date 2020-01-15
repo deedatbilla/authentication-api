@@ -17,7 +17,9 @@ const userSchema = mongoose.Schema({
     voter_id: {
         type: Number,
         required: true,
-        trim: true
+        unique: true,
+        maxLength: 10,
+        minLength: 10,
     },
     email: {
         type: String,
@@ -30,10 +32,11 @@ const userSchema = mongoose.Schema({
             }
         }
     },
-    pin: {
-        type: Number,
+    password: {
+        type: String,
         required: true,
-        minLength: 7,
+        maxLength: 4,
+        minLength: 4,
     },
     tokens: [{
         token: {
@@ -61,9 +64,9 @@ userSchema.methods.generateAuthToken = async function() {
     return token
 }
 
-userSchema.statics.findByCredentials = async (email, password) => {
+userSchema.statics.findByCredentials = async (voter_id, password) => {
     // Search for a user by email and password.
-    const user = await User.findOne({ email} )
+    const user = await User.findOne({ voter_id} )
     if (!user) {
         throw new Error({ error: 'Invalid login credentials' })
     }

@@ -21,8 +21,8 @@ router.post('/users', async (req, res) => {
 router.post('/users/login', async(req, res) => {
     //Login a registered user
     try {
-        const { email, password } = req.body
-        const user = await User.findByCredentials(email, password)
+        const { voter_id, password } = req.body
+        const user = await User.findByCredentials(voter_id, password)
         if (!user) {
             return res.status(401).send({error: 'Login failed! Check authentication credentials'})
         }
