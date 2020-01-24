@@ -14,6 +14,17 @@ const userSchema = mongoose.Schema({
         required: true,
         trim: true
     },
+    public_key: {
+        type: String,
+        required: true,
+        trim: true
+    },
+
+    private_key: {
+        type: String,
+        required: true,
+        trim: true
+    },
     voter_id: {
         type: Number,
         required: true,

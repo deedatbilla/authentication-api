@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
-//console.log(`url is ${process.env.MONGODB_URL}` )
-const MONGODB_URL= "mongodb+srv://deedat5:Portable24198@cluster0-tkvnj.mongodb.net/voter_database?retryWrites=true&w=majority"
-mongoose.connect(MONGODB_URL, {
+ const url="mongodb://localhost:27017/e-voting" 
+mongoose.connect(url, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
