@@ -14,16 +14,16 @@ const userSchema = mongoose.Schema({
         required: true,
         trim: true
     },
-    public_key: {
+    address: {
         type: String,
         required: true,
-        trim: true
+        
     },
 
-    private_key: {
+    privateKey: {
         type: String,
         required: true,
-        trim: true
+        
     },
     voter_id: {
         type: Number,
