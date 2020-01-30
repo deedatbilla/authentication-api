@@ -47,8 +47,7 @@ router.get("/candidate/profile", async(req, res, next) => {
 
 
     try {
-        const { cid } = req.body
-        const candidate = await Candidate.findByCid(cid)
+        const candidate = await Candidate.find()
         if (!candidate) {
             return res.status(401).send({error: 'candidate profile not found'})
         }

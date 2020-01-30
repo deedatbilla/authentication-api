@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 
 const candidateSchema = mongoose.Schema({
-  
   //candidate id
   cid: {
-    type: Number,
+    type: String,
     required: true
   },
   profileImg: {
@@ -12,7 +11,7 @@ const candidateSchema = mongoose.Schema({
   }
 });
 
-candidateSchema.statics.findByCid = async (cid) => {
+candidateSchema.statics.findByCredentials  = async cid => {
   // Search for a candidate by id
   const candidate = await Candidate.findOne({ cid });
   if (!candidate) {
