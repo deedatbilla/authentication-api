@@ -4,6 +4,7 @@ const Candidate = require('../models/Candidate')
 const multer = require('multer');
 const uuidv4 = require('uuid/v4')
 const router = express.Router()
+var cors = require('cors')
 const DIR = './public/';
 
 const storage = multer.diskStorage({
@@ -27,7 +28,17 @@ var upload = multer({
         }
     }
 });
-router.post('/candidate/image', upload.single('profileImg'), async(req, res) => {
+var whitelist = ['https://ghana-market-association.firebaseapp.com']
+var corsOptionsDelegate = function (req, callback) {
+    var corsOptions;
+    if (whitelist.indexOf(req.header('Origin')) !== -1) {
+      corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+    } else {
+      corsOptions = { origin: true } // disable CORS for this request
+    }
+    callback(null, corsOptions) // callback expects two parameters: error and options
+  }
+router.post('/candidate/image',cors(corsOptionsDelegate), upload.single('profileImg'), async(req, res) => {
     // add candidate profile image
     const url = req.protocol + '://' + req.get('host')
     try {
@@ -43,7 +54,7 @@ router.post('/candidate/image', upload.single('profileImg'), async(req, res) => 
 
 })
 
-router.get("/candidate/profile", async(req, res, next) => {
+router.get("/candidate/profile",cors(corsOptionsDelegate), async(req, res, next) => {
 
 
     try {
