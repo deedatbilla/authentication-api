@@ -9,6 +9,10 @@ var cors = require('cors')
 app.use(express.json())
 app.use(userRouter)
 app.use(candidateRouter)
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
 app.use('/public', express.static('public'));
 app.use((req, res, next) => {
     // Error goes via `next()` method
