@@ -9,18 +9,6 @@ var cors = require('cors')
 app.use(express.json())
 app.use(userRouter)
 app.use(candidateRouter)
-
-
-//   var whitelist = ['https://ghana-market-association.firebaseapp.com']
-// var corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error('Not allowed by CORS'))
-//     }
-//   }
-// }
 app.use(cors())
 app.use('/public', express.static('public'));
 app.use((req, res, next) => {

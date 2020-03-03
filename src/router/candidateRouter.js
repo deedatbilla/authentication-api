@@ -4,7 +4,6 @@ const Candidate = require('../models/Candidate')
 const multer = require('multer');
 const uuidv4 = require('uuid/v4')
 const router = express.Router()
-
 const DIR = './public/';
 
 const storage = multer.diskStorage({
@@ -28,8 +27,7 @@ var upload = multer({
         }
     }
 });
-
-router.post('/candidate/image',  upload.single('profileImg'), async(req, res) => {
+router.post('/candidate/image', upload.single('profileImg'), async(req, res) => {
     // add candidate profile image
     const url = req.protocol + '://' + req.get('host')
     try {
