@@ -9,11 +9,8 @@ var cors = require('cors')
 app.use(express.json())
 app.use(userRouter)
 app.use(candidateRouter)
-var corsOptions = {
-    origin: 'https://ghana-market-association.firebaseapp.com/',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
-app.use(cors(corsOptions))
+app.options('*', cors())
+app.use(cors())
 app.use('/public', express.static('public'));
 app.use((req, res, next) => {
     // Error goes via `next()` method
