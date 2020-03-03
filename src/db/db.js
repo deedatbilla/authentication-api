@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
- const url="mongodb://localhost:27017/e-voting" 
+ const url="mongodb+srv://deedat5:Portable24198@cluster0-tkvnj.mongodb.net/voters?retryWrites=true&w=majority" 
 mongoose.connect(url, {
     useNewUrlParser: true,
     useCreateIndex: true,
