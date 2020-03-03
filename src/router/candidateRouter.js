@@ -32,7 +32,7 @@ router.post('/candidate/image', upload.single('profileImg'), async(req, res) => 
     const url = req.protocol + '://' + req.get('host')
     try {
         const candidate = new Candidate({
-            cid: req.body.cid,
+            
             profileImg: url + '/public/' + req.file.filename
         })
         await candidate.save()
