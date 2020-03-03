@@ -2,6 +2,7 @@ const express = require('express')
 const userRouter = require('./router/user')
 const candidateRouter=require('./router/candidateRouter')
 const port = process.env.PORT
+var cors_proxy = require('cors-anywhere');
 require('./db/db')
 
 const app = express()
@@ -23,7 +24,12 @@ app.use(function (err, req, res, next) {
     if (!err.statusCode) err.statusCode = 500;
     res.status(err.statusCode).send(err.message);
 });
-app.listen(port, () => {
+
+cors_proxy.createServer({
+    originWhitelist: [], // Allow all origins
+    requireHeader: ['origin', 'x-requested-with'],
+    removeHeaders: ['cookie', 'cookie2']
+}).listen(port, () => {
     console.log(`Server running on port ${port}`)
    
 }) 
