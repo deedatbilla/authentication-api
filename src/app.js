@@ -24,6 +24,6 @@ app.use(function (err, req, res, next) {
     res.status(err.statusCode).send(err.message);
 });
 app.listen(port, () => {
-    console.log(`Server running on port ${5000}`)
+    console.log(`Server running on port ${port}`)
    
 }) 
