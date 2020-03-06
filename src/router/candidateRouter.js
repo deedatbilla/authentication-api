@@ -54,6 +54,9 @@ router.post('/candidate/image',cors(corsOptionsDelegate), upload.single('profile
 
 })
 
+
+
+
 router.get("/candidate/profile",cors(corsOptionsDelegate), async(req, res, next) => {
 
 

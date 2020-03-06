@@ -1,6 +1,7 @@
 const express = require('express')
 const userRouter = require('./router/user')
 const candidateRouter=require('./router/candidateRouter')
+const partyRouter = require('./router/PartyRouter')
 const port = process.env.PORT
 require('./db/db')
 
@@ -9,6 +10,7 @@ var cors = require('cors')
 app.use(express.json())
 app.use(userRouter)
 app.use(candidateRouter)
+app.use(partyRouter)
 
 
 
@@ -25,7 +27,7 @@ app.use(function (err, req, res, next) {
     if (!err.statusCode) err.statusCode = 500;
     res.status(err.statusCode).send(err.message);
 });
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`)
+app.listen(5000, () => {
+    console.log(`Server running on port ${5000}`)
    
 }) 
