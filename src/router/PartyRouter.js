@@ -38,18 +38,7 @@ var corsOptionsDelegate = function (req, callback) {
     callback(null, corsOptions) // callback expects two parameters: error and options
   }
 
-// router.post('/party', async (req, res) => {
-//     // Create a new party
-//     try {
 
-//         const party = new Party(req.body)
-//         await party.save()
-       
-//         res.status(201).send({ party})
-//     } catch (error) {
-//         res.status(400).send(error)
-//     }
-// })   
  
 router.post('/party',cors(corsOptionsDelegate), upload.single('partyImg'), async(req, res) => {
     // add party data
@@ -68,5 +57,19 @@ router.post('/party',cors(corsOptionsDelegate), upload.single('partyImg'), async
 
 })
 
+router.get("/fetchallparties",cors(corsOptionsDelegate), async(req, res, next) => {
 
+
+    try {
+        const party = await Party.find()
+        if (!party) {
+            return res.status(401).send({error: 'no parties were found'})
+        }
+        
+        res.send({ party, message:'party list retrieved successfully!'})
+    } catch (error) {
+        res.status(400).send(error)
+    }
+    
+});
 module.exports = router
