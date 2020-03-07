@@ -2,6 +2,7 @@ const express = require('express')
 const User = require('../models/User')
 const auth = require("../middleware/auth")
 const router = express.Router()
+import {corsOptionsDelegate} from './corsFilter'
 var cors = require('cors')
 
 
@@ -67,7 +68,7 @@ router.post('/users/me/logoutall', auth, async(req, res) => {
 })
 
 
-router.get("/fetchallvoters",cors(), async(req, res, next) => {
+router.get("/fetchallvoters",cors(corsOptionsDelegate), async(req, res, next) => {
 
 
     try {
