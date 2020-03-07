@@ -2,10 +2,13 @@ const express = require('express')
 const User = require('../models/User')
 const auth = require("../middleware/auth")
 const router = express.Router()
+var cors = require('cors')
+
 
 router.get('/',(req,res) =>{
 res.send({message:'hi'})
 })
+
 router.post('/users', async (req, res) => {
     // Create a new user
     try {
@@ -64,7 +67,7 @@ router.post('/users/me/logoutall', auth, async(req, res) => {
 })
 
 
-router.get("/fetchallvoters", async(req, res, next) => {
+router.get("/fetchallvoters",cors(), async(req, res, next) => {
 
 
     try {
