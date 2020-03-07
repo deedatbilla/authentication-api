@@ -63,4 +63,20 @@ router.post('/users/me/logoutall', auth, async(req, res) => {
     }
 })
 
+
+router.get("/fetchallvoters", async(req, res, next) => {
+
+
+    try {
+        const user = await User.find()
+        if (!user) {
+            return res.status(401).send({error: 'no voters were found'})
+        }
+        
+        res.send({ user, message:'voter list retrieved successfully!'})
+    } catch (error) {
+        res.status(400).send(error)
+    }
+    
+});
 module.exports = router
