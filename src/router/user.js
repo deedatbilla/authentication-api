@@ -2,7 +2,7 @@ const express = require('express')
 const User = require('../models/User')
 const auth = require("../middleware/auth")
 const router = express.Router()
-import {corsOptionsDelegate} from './corsFilter'
+
 var cors = require('cors')
 
 
@@ -66,7 +66,16 @@ router.post('/users/me/logoutall', auth, async(req, res) => {
         res.status(500).send(error)
     }
 })
-
+var whitelist = ['https://ghana-market-association.firebaseapp.com']
+export var corsOptionsDelegate = function (req, callback) {
+    var corsOptions;
+    if (whitelist.indexOf(req.header('Origin')) !== -1) {
+      corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+    } else {
+      corsOptions = { origin: true } // disable CORS for this request
+    }
+    callback(null, corsOptions) // callback expects two parameters: error and options
+  }
 
 router.get("/fetchallvoters",cors(corsOptionsDelegate), async(req, res, next) => {
 
