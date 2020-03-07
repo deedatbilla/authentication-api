@@ -4,7 +4,7 @@ const auth = require("../middleware/auth")
 const router = express.Router()
 
 var cors = require('cors')
-var whitelist = ['https://ghana-market-association.firebaseapp.com']
+var whitelist = ['https://ghana-market-association.firebaseapp.com',"http://localhost:3000"]
 var corsOptionsDelegate = function (req, callback) {
     var corsOptions;
     if (whitelist.indexOf(req.header('Origin')) !== -1) {
