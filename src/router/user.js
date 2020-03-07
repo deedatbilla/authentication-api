@@ -4,7 +4,16 @@ const auth = require("../middleware/auth")
 const router = express.Router()
 
 var cors = require('cors')
-
+var whitelist = ['https://ghana-market-association.firebaseapp.com']
+var corsOptionsDelegate = function (req, callback) {
+    var corsOptions;
+    if (whitelist.indexOf(req.header('Origin')) !== -1) {
+      corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+    } else {
+      corsOptions = { origin: true } // disable CORS for this request
+    }
+    callback(null, corsOptions) // callback expects two parameters: error and options
+  }
 
 router.get('/',(req,res) =>{
 res.send({message:'hi'})
@@ -38,12 +47,12 @@ router.post('/users/login', async(req, res) => {
 
 })
 
-router.get('/users/me', auth, async(req, res) => {
+router.get('/users/me',cors(corsOptionsDelegate), auth, async(req, res) => {
     // View logged in user profile
     res.send(req.user)
 })
 
-router.post('/users/me/logout', auth, async (req, res) => {
+router.post('/users/me/logout',cors(corsOptionsDelegate), auth, async (req, res) => {
     // Log user out of the application
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
@@ -56,7 +65,7 @@ router.post('/users/me/logout', auth, async (req, res) => {
     }
 })
 
-router.post('/users/me/logoutall', auth, async(req, res) => {
+router.post('/users/me/logoutall',cors(corsOptionsDelegate), auth, async(req, res) => {
     // Log user out of all devices
     try {
         req.user.tokens.splice(0, req.user.tokens.length)
@@ -66,16 +75,7 @@ router.post('/users/me/logoutall', auth, async(req, res) => {
         res.status(500).send(error)
     }
 })
-var whitelist = ['https://ghana-market-association.firebaseapp.com']
-var corsOptionsDelegate = function (req, callback) {
-    var corsOptions;
-    if (whitelist.indexOf(req.header('Origin')) !== -1) {
-      corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-    } else {
-      corsOptions = { origin: true } // disable CORS for this request
-    }
-    callback(null, corsOptions) // callback expects two parameters: error and options
-  }
+
 
 router.get("/fetchallvoters",cors(corsOptionsDelegate), async(req, res, next) => {
 
