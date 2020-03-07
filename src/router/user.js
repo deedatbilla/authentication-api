@@ -19,7 +19,7 @@ router.get('/',(req,res) =>{
 res.send({message:'hi'})
 })
 
-router.post('/users', async (req, res) => {
+router.post('/users',cors(corsOptionsDelegate), async (req, res) => {
     // Create a new user
     try {
         const user = new User(req.body)
@@ -31,7 +31,7 @@ router.post('/users', async (req, res) => {
     }
 })   
  
-router.post('/users/login', async(req, res) => {
+router.post('/users/login',cors(corsOptionsDelegate), async(req, res) => {
     //Login a registered user
     try {
         const { voter_id, password } = req.body
