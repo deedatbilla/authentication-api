@@ -2,6 +2,7 @@ const express = require('express')
 const userRouter = require('./router/user')
 const candidateRouter=require('./router/candidateRouter')
 const partyRouter = require('./router/PartyRouter')
+const adminRouter = require('./router/adminRouter')
 const port = process.env.PORT
 require('./db/db')
 
@@ -10,6 +11,7 @@ var cors = require('cors')
 app.use(express.json())
 app.use(userRouter)
 app.use(candidateRouter)
+app.use(adminRouter)
 app.use(partyRouter)
 
 

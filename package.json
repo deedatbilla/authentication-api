@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "big-integer": "^1.6.48",
     "cors": "^2.8.5",
     "cors-anywhere": "^0.4.1",
     "express": "^4.17.1",

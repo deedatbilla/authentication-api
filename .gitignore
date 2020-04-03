@@ -1,3 +1,6 @@
 /node_modules
 /.env
 /public
+gen.js
+myjsonfile.json
+trianglenumbers.js
