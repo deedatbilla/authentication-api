@@ -15,7 +15,7 @@ var corsOptionsDelegate = function (req, callback) {
     callback(null, corsOptions) // callback expects two parameters: error and options
   }
 
-router.get('/',(req,res) =>{
+
 
 
 router.post('/admin',cors(corsOptionsDelegate), async (req, res) => {
@@ -75,6 +75,6 @@ router.post('/admin/me/logoutall',cors(corsOptionsDelegate), auth, async(req, re
     }
 })
 
-});
+
 
 module.exports = router
